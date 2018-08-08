@@ -1,0 +1,38 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.github.jengelman.gradle.plugins:shadow:2.0.4"
+    }
+}
+plugins {
+    id "com.github.johnrengelman.shadow" version "2.0.4"
+}
+
+group 'mano.frish.vertica.udx'
+version '1.0'
+
+apply plugin: 'java'
+apply plugin: 'com.github.johnrengelman.shadow'
+apply from: "dependencies.gradle"
+
+sourceCompatibility = 1.8
+
+
+
+shadowJar {
+    baseName = 'vertica.udf'
+    classifier = null
+    version = null
+    zip64 = true
+    exclude 'LICENSE'
+    exclude 'META-INF/*.SF'
+    exclude 'META-INF/*.DSA'
+    exclude 'META-INF/*.RSA'
+    exclude 'opt/vertica/bin/VerticaSDK.jar'
+    exclude 'src/main/java/utils/test/*.java'
+    exclude 'src/main/java/mainTest.java'
+}
